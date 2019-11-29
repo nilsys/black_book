@@ -1,10 +1,22 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart'
+    show debugDefaultTargetPlatformOverride;
 
 import 'model/model.dart';
 import 'screens/home_screen.dart';
 
 void main() async {
+  _setTargetPlatformForDesktop();
   runApp(MainApp());
+}
+
+void _setTargetPlatformForDesktop() {
+  // No need to handle macOS, as it has now been added to TargetPlatform.
+  if (Platform.isLinux || Platform.isWindows) {
+    debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  }
 }
 
 class MainApp extends StatefulWidget {
